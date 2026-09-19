@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sehrish Naz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: "Inter", sans-serif;
+
+            color: #18181b;
+
+            /* Soft abstract background */
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(129, 140, 248, 0.28),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    rgba(192, 132, 252, 0.22),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 75% 85%,
+                    rgba(45, 212, 191, 0.18),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 20% 90%,
+                    rgba(96, 165, 250, 0.15),
+                    transparent 30%
+                ),
+                #f7f7f8;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* Subtle blurred background shapes */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            top: -120px;
+            right: -100px;
+
+            background: rgba(139, 92, 246, 0.10);
+
+            border-radius: 50%;
+
+            filter: blur(50px);
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 300px;
+            height: 300px;
+
+            bottom: -120px;
+            left: -80px;
+
+            background: rgba(20, 184, 166, 0.09);
+
+            border-radius: 50%;
+
+            filter: blur(50px);
+
+            pointer-events: none;
+        }
+
+
+        .card {
+            width: min(90%, 560px);
+
+            padding: 64px 48px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.88);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.08),
+                0 0 80px rgba(99, 102, 241, 0.08);
+
+            backdrop-filter: blur(12px);
+
+            animation: appear 0.7s ease-out;
+
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .badge {
+            display: inline-block;
+
+            margin-bottom: 28px;
+
+            padding: 8px 14px;
+
+            border-radius: 999px;
+
+            background: #f0f0ff;
+
+            color: #4f46e5;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        h1 {
+            margin-bottom: 20px;
+
+            font-size: clamp(42px, 8vw, 64px);
+
+            line-height: 1;
+
+            letter-spacing: -0.05em;
+
+            font-weight: 700;
+        }
+
+
+        .message {
+            margin-bottom: 24px;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            color: #52525b;
+        }
+
+
+        .name {
+            font-weight: 600;
+
+            color: #4f46e5;
+        }
+
+
+        .tech {
+            margin-top: 32px;
+
+            color: #a1a1aa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .divider {
+            width: 48px;
+
+            height: 3px;
+
+            margin: 28px auto;
+
+            border-radius: 999px;
+
+            background: #4f46e5;
+        }
+
+
+        /* Question */
+
+        .question {
+            margin-top: 30px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #52525b;
+        }
+
+
+        .buttons {
+            position: relative;
+
+            width: 100%;
+
+            height: 70px;
+
+            margin-top: 15px;
+        }
+
+
+        .buttons button {
+            padding: 10px 22px;
+
+            border: none;
+
+            border-radius: 999px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            background: #4f46e5;
+
+            color: white;
+
+            box-shadow:
+                0 6px 18px rgba(79, 70, 229, 0.18);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        /* Yes button */
+
+        #yesButton {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-115%, -50%);
+        }
+
+
+        #yesButton:hover {
+            transform:
+                translate(-115%, -50%)
+                translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(79, 70, 229, 0.28);
+        }
+
+
+        /* No button */
+
+        #noButton {
+            position: absolute;
+
+            left: 60%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            transition:
+                left 0.15s ease,
+                top 0.15s ease;
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .card {
+                padding: 48px 28px;
+            }
+
+            .buttons {
+                height: 80px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <main class="card">
+
+        <div class="badge">
+            HELLO, WORLD.
+        </div>
+
+
+        <h1>Sehrish Naz</h1>
+
+
+        
+
+
+        <p class="message">
+            Just a surprisingly complicated way to say hello. 😛
+        </p>
+
+
+        <div class="divider"></div>
+
+
+        <p class="tech">
+            Built with Python · Containerized with Docker · Somehow still works.
+        </p>
+
+
+        <div class="question">
+            Do you like it?
+        </div>
+
+
+        <div class="buttons">
+
+            <button id="yesButton" onclick="yesClicked()">
+                Yes
+            </button>
+
+
+            <button id="noButton">
+                No
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const noButton =
+            document.getElementById("noButton");
+
+        const buttons =
+            document.querySelector(".buttons");
+
+
+        document.addEventListener(
+            "mousemove",
+            function(event) {
+
+                const buttonRect =
+                    noButton.getBoundingClientRect();
+
+
+                const buttonCenterX =
+                    buttonRect.left +
+                    buttonRect.width / 2;
+
+
+                const buttonCenterY =
+                    buttonRect.top +
+                    buttonRect.height / 2;
+
+
+                const distanceX =
+                    event.clientX -
+                    buttonCenterX;
+
+
+                const distanceY =
+                    event.clientY -
+                    buttonCenterY;
+
+
+                const distance =
+                    Math.sqrt(
+                        distanceX * distanceX +
+                        distanceY * distanceY
+                    );
+
+
+                /*
+                    The button moves away
+                    before the mouse can reach it.
+                */
+
+                if (distance < 150) {
+
+                    moveButton();
+
+                }
+
+            }
+        );
+
+
+        function moveButton() {
+
+            const maxX =
+                buttons.clientWidth -
+                noButton.offsetWidth;
+
+
+            const maxY =
+                buttons.clientHeight -
+                noButton.offsetHeight;
+
+
+            const x =
+                Math.random() * maxX;
+
+
+            const y =
+                Math.random() * maxY;
+
+
+            noButton.style.left =
+                x + "px";
+
+
+            noButton.style.top =
+                y + "px";
+
+
+            noButton.style.transform =
+                "none";
+        }
+
+
+        function yesClicked() {
+
+            alert("I knew it. 😌");
+
+        }
+
+    </script>
+
+</body>
+</html>
