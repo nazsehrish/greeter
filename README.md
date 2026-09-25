@@ -1,6 +1,6 @@
 # Greeter
 
-A tiny Python web application that displays a modern greeting page.
+A tiny Python web application that displays a modern greeting page. That's all, that's the Readme file.
 
 The app is built using Python's built-in `http.server` module and can be packaged and run as a Docker container.
 
